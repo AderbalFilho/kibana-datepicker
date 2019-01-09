@@ -52,14 +52,24 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
 
     $scope.setAbsolute = function() {
         absoluteApplied = true;
-        $rootScope.$$timefilter.time.from = $scope.time.from = $scope.time.absolute_from;
-        $rootScope.$$timefilter.time.to = $scope.time.to = $scope.time.absolute_to;
+        if ($rootScope.$$timefilter) {
+            $rootScope.$$timefilter.time.from = $scope.time.from = $scope.time.absolute_from;
+            $rootScope.$$timefilter.time.to = $scope.time.to = $scope.time.absolute_to;
+        }
     };
 
     $rootScope.$watchMulti([
         '$$timefilter.time.from',
         '$$timefilter.time.to'
     ], setTime);
+
+    $scope.addADay = function() {
+        $scope.time.absolute_from = moment($scope.time.absolute_from).add(1,'days').toDate();
+    }
+
+    $scope.decreaseADay = function() {
+        $scope.time.absolute_from = moment($scope.time.absolute_from).subtract(1,'days').toDate();
+    }
 
     function setTime(timeArray) {
         if (absoluteApplied) {
