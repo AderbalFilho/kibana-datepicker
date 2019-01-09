@@ -14,7 +14,8 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
     $scope.time = {
         from: moment(),
         to: moment(),
-        absolute_date: moment()
+        absolute_from: moment(),
+        absolute_to: moment()
     };
 
     $scope.absolute = {
@@ -22,15 +23,24 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
         to: moment()
     };
 
-    $scope.$watch('time.absolute_date', function (date) {
+    $scope.$watch('time.absolute_from', function (date) {
+        if (!date) {
+            date = new Date();
+        }
         date.setHours(0);
         date.setMinutes(0);
         date.setSeconds(0);
         date.setMilliseconds(0);
-        if (_.isDate(date)) $scope.time.absolute_date = moment(date);
+        if (_.isDate(date)) $scope.time.absolute_from = moment(date);
+        date.setHours(23);
+        date.setMinutes(59);
+        date.setSeconds(59);
+        date.setMilliseconds(999);
+        if (_.isDate(date)) $scope.time.absolute_to = moment(date);
     });
 
     $scope.setToNow = function () {
+        $scope.time.absolute_from = moment();
         $scope.time.absolute_to = moment();
     };
 
@@ -42,7 +52,7 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
 
     $scope.setAbsolute = function() {
         absoluteApplied = true;
-        $rootScope.$$timefilter.time.from = $scope.time.from = $scope.time.absolute_date;
+        $rootScope.$$timefilter.time.from = $scope.time.from = $scope.time.absolute_from;
         $rootScope.$$timefilter.time.to = $scope.time.to = $scope.time.absolute_to;
     };
 
@@ -60,7 +70,7 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
         $scope.time = {
             from: timeArray[0],
             to: timeArray[1],
-            absolute_date: dateMath.parse(timeArray[0]),
+            absolute_from: dateMath.parse(timeArray[0]),
             absolute_to: dateMath.parse(timeArray[1], true)
         }
     }
@@ -92,6 +102,6 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
         $scope.language = $scope.translations[newValue];
         // Update angular $locale to the correct language. This might change things you dont want to!
         angular.copy(locales[newValue], $locale);
-        $scope.time.absolute_date = new Date($scope.time.absolute_date);
+        $scope.time.absolute_from = new Date($scope.time.absolute_from);
     });
 });

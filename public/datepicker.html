@@ -5,19 +5,19 @@
             <form name="absoluteTime" ng-submit="applyAbsolute()">
                 <div class="kbn-timepicker-section kbn-inside-dashboard">
                     <div>
-                        <label class="small">{{language['date']}}: <span ng-show="!time.absolute_date"><i>{{language['invalid_date']}}</i></span>
+                        <label class="small">{{language['date']}}: <span ng-show="!time.absolute_from"><i>{{language['invalid_date']}}</i></span>
                         </label>
-                        <input type="text" required ng-if="!vis.params.hide_input" class="form-control" input-datetime="{{format}}" ng-model="time.absolute_date">
+                        <input type="text" required ng-if="!vis.params.hide_input" class="form-control" input-datetime="{{format}}" ng-model="time.absolute_from">
                     </div>
                     <div ng-if="!vis.params.hide_calendar">
-                        <datepicker ng-model="time.absolute_date" show-weeks="false"></datepicker>
+                        <datepicker ng-model="time.absolute_from" show-weeks="false"></datepicker>
                     </div>
                 </div>
 
                 <div class="kbn-timepicker-section" ng-class="{ 'col-xs-12': !vis.params.submit_right }">
                     <label>&nbsp;</label>
                     <div class="form-group">
-                        <button class="btn btn-primary" ng-disabled="!time.absolute_date" type="submit">
+                        <button class="btn btn-primary" ng-disabled="!time.absolute_from" type="submit">
                             {{language['go']}}
                         </button>
                     </div>
