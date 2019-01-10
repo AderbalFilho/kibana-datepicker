@@ -27,7 +27,6 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
         if (!date) {
             date = new Date();
         }
-        console.log(date instanceof Date);
         if (date instanceof Date) {
             date.setHours(0);
             date.setMinutes(0);
