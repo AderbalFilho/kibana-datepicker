@@ -41,25 +41,14 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
         }
     });
 
-    $scope.setToNow = function () {
-        $scope.time.absolute_from = moment();
-        $scope.time.absolute_to = moment();
-    };
-
     $scope.applyAbsolute = function () {
-        $scope.from = moment($scope.absolute.from);
-        $scope.to = moment($scope.absolute.to);
-        $scope.setAbsolute();
-    };
-
-    $scope.setAbsolute = function() {
+        $scope.$parent.vis.API.timeFilter.setTime({
+            from: moment($scope.time.absolute_from),
+            to: moment($scope.time.absolute_to),
+            mode: 'absolute'
+        });
+        // $scope.$parent.vis.API.timeFilter.toggleRefresh();
         absoluteApplied = true;
-        if (!$rootScope.$$timefilter) {
-            $rootScope.$$timefilter = {};
-            $rootScope.$$timefilter.time = $scope.time;
-        }
-        $rootScope.$$timefilter.time.from = $scope.time.from = $scope.time.absolute_from;
-        $rootScope.$$timefilter.time.to = $scope.time.to = $scope.time.absolute_to;
     };
 
     $rootScope.$watchMulti([
