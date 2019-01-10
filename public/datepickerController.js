@@ -27,16 +27,19 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
         if (!date) {
             date = new Date();
         }
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
-        date.setMilliseconds(0);
-        if (_.isDate(date)) $scope.time.absolute_from = moment(date);
-        date.setHours(23);
-        date.setMinutes(59);
-        date.setSeconds(59);
-        date.setMilliseconds(999);
-        if (_.isDate(date)) $scope.time.absolute_to = moment(date);
+        console.log(date instanceof Date);
+        if (date instanceof Date) {
+            date.setHours(0);
+            date.setMinutes(0);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
+            if (_.isDate(date)) $scope.time.absolute_from = moment(date);
+            date.setHours(23);
+            date.setMinutes(59);
+            date.setSeconds(59);
+            date.setMilliseconds(999);
+            if (_.isDate(date)) $scope.time.absolute_to = moment(date);
+        }
     });
 
     $scope.setToNow = function () {
