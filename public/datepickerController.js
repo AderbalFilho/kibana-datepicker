@@ -52,10 +52,12 @@ module.controller('KbnDatePickerController', function (datepickerPluginLocales, 
 
     $scope.setAbsolute = function() {
         absoluteApplied = true;
-        if ($rootScope.$$timefilter) {
-            $rootScope.$$timefilter.time.from = $scope.time.from = $scope.time.absolute_from;
-            $rootScope.$$timefilter.time.to = $scope.time.to = $scope.time.absolute_to;
+        if (!$rootScope.$$timefilter) {
+            $rootScope.$$timefilter = {};
+            $rootScope.$$timefilter.time = $scope.time;
         }
+        $rootScope.$$timefilter.time.from = $scope.time.from = $scope.time.absolute_from;
+        $rootScope.$$timefilter.time.to = $scope.time.to = $scope.time.absolute_to;
     };
 
     $rootScope.$watchMulti([
