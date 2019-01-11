@@ -5,10 +5,10 @@
             <form name="absoluteTime" ng-submit="applyAbsolute()">
                 <div class="kbn-timepicker-section kbn-inside-dashboard container-fluid">
                     <div class="row">
-                        <div class="btn btn-primary col-md-2" ng-click="decreaseADay()" style="height: 20px;"><span style="position: relative; top: -7px; font-weight: bold;">< </span></div>
+                        <button class="btn btn-primary col-md-2" ng-click="decreaseADay()" style="height: 20px;"><span style="position: relative; top: -7px; font-weight: bold;">< </span></button>
                         <label class="small col-md-8" style="text-align: center;">{{language['date']}}: <span ng-show="!time.absolute_from"><i>{{language['invalid_date']}}</i></span>
                         </label>
-                        <div class="btn btn-primary col-md-2" ng-click="addADay()" style="height: 20px;"><span style="position: relative; top: -7px; font-weight: bold;"> ></span></div>
+                        <button class="btn btn-primary col-md-2" ng-click="addADay()" style="height: 20px;"><span style="position: relative; top: -7px; font-weight: bold;"> ></span></button>
                         <input type="text" required ng-if="!vis.params.hide_input" class="form-control" input-datetime="{{format}}" ng-model="time.absolute_from">
                     </div>
                     <div ng-if="!vis.params.hide_calendar">
